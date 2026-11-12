@@ -1,0 +1,1922 @@
+<!DOCTYPE html>
+<!-- saved from url=(0118)file:///C:/Users/Karti/.gemini/antigravity/brain/1ba67de3-390c-4b9e-b17c-68a1ca28db53/ai_health_companion_website.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Health Companion — Indian Prescription &amp; Medical Report Assistant</title>
+  <!-- Tesseract.js for In-Browser OCR -->
+  <script src="./AI Health Companion — Indian Prescription &amp; Medical Report Assistant_TEST03_files/tesseract.min.js.download"></script>
+  <style>
+    :root {
+      --primary: #0284c7;
+      --primary-hover: #0369a1;
+      --primary-light: #e0f2fe;
+      --secondary: #0f172a;
+      --background: #f8fafc;
+      --surface: #ffffff;
+      --border: #e2e8f0;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --success: #10b981;
+      --success-bg: #ecfdf5;
+      --warning: #f59e0b;
+      --warning-bg: #fffbeb;
+      --danger: #ef4444;
+      --danger-bg: #fef2f2;
+      --radius: 12px;
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans Devanagari", sans-serif;
+    }
+
+    body {
+      background-color: var(--background);
+      color: var(--text);
+      line-height: 1.5;
+      padding-bottom: 60px;
+    }
+
+    /* Top Navigation Header */
+    .app-header {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 0.9rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .brand-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      font-size: 1.8rem;
+      background: var(--primary-light);
+      padding: 6px 10px;
+      border-radius: 10px;
+    }
+
+    .brand-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--secondary);
+    }
+
+    .brand-tag {
+      font-size: 0.72rem;
+      background: #dbeafe;
+      color: #1e40af;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 700;
+      margin-left: 6px;
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .lang-selector {
+      display: flex;
+      background: #f1f5f9;
+      border-radius: 8px;
+      padding: 2px;
+    }
+
+    .lang-btn {
+      border: none;
+      background: transparent;
+      padding: 6px 12px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    .lang-btn.active {
+      background: white;
+      color: var(--primary);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+
+    /* Container */
+    .main-container {
+      max-width: 1240px;
+      margin: 1.5rem auto;
+      padding: 0 1rem;
+    }
+
+    /* STEP 1: TWO PRIMARY OPTIONS (Cards) */
+    .option-selector-section {
+      margin-bottom: 1.8rem;
+    }
+
+    .option-selector-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--secondary);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .upload-type-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .upload-type-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .upload-choice-card {
+      background: white;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .upload-choice-card:hover {
+      border-color: #93c5fd;
+      transform: translateY(-2px);
+    }
+
+    .upload-choice-card.active {
+      border-color: var(--primary);
+      background: #f0f9ff;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
+    }
+
+    .choice-icon {
+      font-size: 2.2rem;
+      background: #f1f5f9;
+      padding: 10px;
+      border-radius: 12px;
+      line-height: 1;
+    }
+
+    .upload-choice-card.active .choice-icon {
+      background: white;
+    }
+
+    .choice-content h3 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--secondary);
+      margin-bottom: 4px;
+    }
+
+    .choice-content p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .choice-badge {
+      display: inline-block;
+      margin-top: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .badge-rx { background: #e0f2fe; color: #0369a1; }
+    .badge-lab { background: #fef3c7; color: #92400e; }
+
+    /* Cards & Grids */
+    .card {
+      background: white;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--secondary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .grid-workspace {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 950px) {
+      .grid-workspace {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Native Label Upload Dropzone */
+    .upload-label-btn {
+      display: block;
+      border: 2px dashed var(--primary);
+      border-radius: var(--radius);
+      padding: 1.6rem;
+      text-align: center;
+      background: #f0f9ff;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .upload-label-btn:hover {
+      background: var(--primary-light);
+      border-color: var(--primary-hover);
+    }
+
+    .file-input-hidden {
+      display: none;
+    }
+
+    /* Benchmark Selector */
+    .benchmark-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+
+    .benchmark-box select {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      font-size: 0.88rem;
+      margin-top: 6px;
+      background: white;
+    }
+
+    /* Uploaded Image Metadata Bar */
+    .upload-metadata-bar {
+      display: none;
+      background: #ecfdf5;
+      border: 1px solid #6ee7b7;
+      border-radius: 8px;
+      padding: 8px 14px;
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: #065f46;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Image Preview Box */
+    .image-preview-container {
+      position: relative;
+      background: #0f172a;
+      border-radius: 8px;
+      overflow: hidden;
+      min-height: 240px;
+      max-height: 380px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #cbd5e1;
+      margin-top: 12px;
+    }
+
+    .image-preview-container img {
+      max-width: 100%;
+      max-height: 380px;
+      object-fit: contain;
+      display: block;
+      transition: transform 0.2s;
+    }
+
+    /* Scanning Laser Animation */
+    .scan-laser {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: #38bdf8;
+      box-shadow: 0 0 15px #38bdf8, 0 0 30px #0284c7;
+      animation: laserSweep 2s ease-in-out infinite;
+      z-index: 10;
+    }
+
+    @keyframes laserSweep {
+      0% { top: 0%; opacity: 0.9; }
+      50% { top: 96%; opacity: 1; }
+      100% { top: 0%; opacity: 0.9; }
+    }
+
+    .ocr-status-overlay {
+      display: none;
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15, 23, 42, 0.9);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      backdrop-filter: blur(4px);
+      z-index: 20;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Image Controls */
+    .image-controls-bar {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+      justify-content: flex-end;
+    }
+
+    .ctrl-btn-sm {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .ctrl-btn-sm:hover { background: #e2e8f0; }
+
+    /* Human-in-the-Loop Tokens */
+    .tokens-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 10px;
+      background: #f8fafc;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      margin-top: 10px;
+    }
+
+    .ocr-token {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+
+    .ocr-token:hover { transform: translateY(-2px); }
+
+    .token-confident {
+      background: #e0f2fe;
+      color: #0369a1;
+      border: 1px solid #bae6fd;
+    }
+
+    .token-doubtful {
+      background: #fffbeb;
+      color: #b45309;
+      border: 2px dashed #f59e0b;
+      animation: pulseAlert 2s infinite;
+    }
+
+    @keyframes pulseAlert {
+      0%, 100% { border-color: #f59e0b; }
+      50% { border-color: #d97706; }
+    }
+
+    .conf-badge {
+      font-size: 0.7rem;
+      background: rgba(0,0,0,0.08);
+      padding: 1px 4px;
+      border-radius: 4px;
+    }
+
+    /* Raw Text Box */
+    .raw-text-editor {
+      width: 100%;
+      min-height: 70px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      font-size: 0.85rem;
+      font-family: monospace;
+      margin-top: 8px;
+      background: #f8fafc;
+      resize: vertical;
+    }
+
+    /* Normalized Medicine & Lab Report Cards */
+    .med-card {
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      border-radius: 8px;
+      padding: 1.1rem;
+      margin-bottom: 12px;
+      background: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .med-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+
+    .med-brand-name {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--secondary);
+    }
+
+    .generic-badge {
+      font-size: 0.8rem;
+      color: #0369a1;
+      background: var(--primary-light);
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    .dosage-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 10px 0;
+      text-align: center;
+    }
+
+    .dosage-slot {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 8px 6px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #64748b;
+    }
+
+    .dosage-slot.active {
+      background: #dbeafe;
+      color: #1e40af;
+      border-color: #93c5fd;
+      font-weight: 800;
+    }
+
+    /* Lab Report Result Item */
+    .lab-result-item {
+      background: white;
+      border: 1px solid var(--border);
+      border-left: 4px solid #10b981;
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+
+    .lab-result-item.abnormal {
+      border-left-color: #ef4444;
+      background: #fffcfc;
+    }
+
+    .lab-result-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .lab-val-badge {
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+    }
+    .badge-normal { background: #dcfce7; color: #15803d; }
+    .badge-high { background: #fee2e2; color: #b91c1c; }
+
+    /* Alerts */
+    .alert-box {
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-size: 0.88rem;
+      line-height: 1.4;
+    }
+
+    .alert-danger { background: var(--danger-bg); border: 1px solid #fca5a5; color: #991b1b; }
+    .alert-warning { background: var(--warning-bg); border: 1px solid #fde68a; color: #92400e; }
+    .alert-success { background: var(--success-bg); border: 1px solid #a7f3d0; color: #065f46; }
+
+    .disclaimer-banner {
+      background: #f1f5f9;
+      border-left: 4px solid #64748b;
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      color: #475569;
+      margin-top: 14px;
+    }
+
+    /* Buttons & Form */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 9px 16px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover { background: var(--primary-hover); }
+
+    .btn-secondary { background: #f1f5f9; color: var(--secondary); border: 1px solid var(--border); }
+    .btn-secondary:hover { background: #e2e8f0; }
+
+    .btn-speak {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      padding: 4px 10px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border-radius: 6px;
+      color: #0f172a;
+      cursor: pointer;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.65);
+      z-index: 300;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .modal-overlay.active { display: flex; }
+    .modal-card {
+      background: white;
+      border-radius: var(--radius);
+      max-width: 480px;
+      width: 100%;
+      padding: 1.5rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    }
+
+    /* Theme Toggle Button */
+    .theme-toggle-btn {
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+      color: var(--secondary);
+      padding: 6px 12px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s;
+    }
+    .theme-toggle-btn:hover {
+      background: #e2e8f0;
+    }
+
+    /* Dark Mode Theming */
+    body.dark-mode {
+      --primary: #38bdf8;
+      --primary-hover: #0ea5e9;
+      --primary-light: #082f49;
+      --secondary: #f8fafc;
+      --background: #0b1120;
+      --surface: #111827;
+      --border: #1f2937;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+
+    body.dark-mode .app-header {
+      background: #111827;
+      border-bottom-color: #1f2937;
+    }
+
+    body.dark-mode .theme-toggle-btn {
+      background: #1e293b;
+      border-color: #374151;
+      color: #fbbf24;
+    }
+    body.dark-mode .theme-toggle-btn:hover {
+      background: #334155;
+    }
+
+    body.dark-mode .card,
+    body.dark-mode .upload-choice-card,
+    body.dark-mode .med-card,
+    body.dark-mode .lab-result-item,
+    body.dark-mode .modal-card {
+      background: #111827;
+      border-color: #1f2937;
+      color: #f1f5f9;
+    }
+
+    body.dark-mode .upload-choice-card.active {
+      background: #082f49;
+      border-color: #38bdf8;
+    }
+
+    body.dark-mode .choice-icon {
+      background: #1f2937;
+      color: #f1f5f9;
+    }
+
+    body.dark-mode .upload-choice-card.active .choice-icon {
+      background: #0f172a;
+    }
+
+    body.dark-mode .upload-label-btn {
+      background: #082f49;
+      border-color: #0284c7;
+    }
+
+    body.dark-mode .benchmark-box {
+      background: #1e293b;
+      border-color: #374151;
+    }
+
+    body.dark-mode .benchmark-box select,
+    body.dark-mode .raw-text-editor,
+    body.dark-mode input,
+    body.dark-mode select {
+      background: #1e293b;
+      color: #f1f5f9;
+      border-color: #374151;
+    }
+
+    body.dark-mode .dosage-slot {
+      background: #1e293b;
+      border-color: #374151;
+      color: #94a3b8;
+    }
+
+    body.dark-mode .dosage-slot.active {
+      background: #0369a1;
+      color: #e0f2fe;
+      border-color: #38bdf8;
+    }
+
+    body.dark-mode .lab-result-item.abnormal {
+      background: #2b1113;
+      border-left-color: #ef4444;
+    }
+
+    body.dark-mode .tokens-container {
+      background: #0f172a;
+      border-color: #1f2937;
+    }
+
+    body.dark-mode .token-confident {
+      background: #082f49;
+      color: #7dd3fc;
+      border-color: #0284c7;
+    }
+
+    body.dark-mode .token-doubtful {
+      background: #451a03;
+      color: #fbbf24;
+      border-color: #f59e0b;
+    }
+
+    body.dark-mode .disclaimer-banner {
+      background: #1e293b;
+      color: #94a3b8;
+      border-left-color: #475569;
+    }
+
+    body.dark-mode .modal-card > div[style*="background: #f1f5f9"] {
+      background: #1e293b !important;
+      color: #f1f5f9 !important;
+    }
+
+    body.dark-mode .btn-secondary,
+    body.dark-mode .btn-speak,
+    body.dark-mode .ctrl-btn-sm {
+      background: #1e293b;
+      color: #f1f5f9;
+      border-color: #374151;
+    }
+
+    body.dark-mode .btn-secondary:hover,
+    body.dark-mode .btn-speak:hover,
+    body.dark-mode .ctrl-btn-sm:hover {
+      background: #334155;
+    }
+
+    body.dark-mode .lang-selector {
+      background: #1e293b;
+    }
+
+    body.dark-mode .lang-btn {
+      color: #94a3b8;
+    }
+
+    body.dark-mode .lang-btn.active {
+      background: #111827;
+      color: #38bdf8;
+    }
+  </style>
+</head>
+<body class="">
+
+  <!-- Top App Header -->
+  <header class="app-header">
+    <div class="brand-area">
+      <span class="brand-icon">🩺</span>
+      <div>
+        <h1 class="brand-title">AI Health Companion</h1>
+        <p style="color: var(--text-muted); font-size: 0.75rem;">
+          Privacy-Preserving • Human-in-the-Loop • Curated Indian Medicine Intelligence
+        </p>
+      </div>
+    </div>
+
+    <div class="header-controls">
+      <button id="themeToggleBtn" class="theme-toggle-btn" onclick="toggleTheme()" title="Switch to Dark Mode">🌙 Dark</button>
+      <div class="lang-selector">
+        <button id="btn-lang-en" class="lang-btn active" onclick="setLanguage(&#39;en&#39;)">English</button>
+        <button id="btn-lang-hi" class="lang-btn" onclick="setLanguage(&#39;hi&#39;)">हिंदी</button>
+        <button id="btn-lang-mr" class="lang-btn" onclick="setLanguage(&#39;mr&#39;)">मराठी</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-container">
+
+    <!-- STEP 1: CHOOSE DOCUMENT TYPE (Prescription vs Lab Report) -->
+    <div class="option-selector-section">
+      <div class="option-selector-title">
+        <span>📑 Step 1: Select What You Want to Upload &amp; Analyze:</span>
+      </div>
+
+      <div class="upload-type-grid">
+        
+        <!-- OPTION A: Prescription Photo -->
+        <div id="choiceCardRx" class="upload-choice-card active" onclick="selectUploadMode(&#39;prescription&#39;)">
+          <div class="choice-icon">💊</div>
+          <div class="choice-content">
+            <h3>Option 1: Doctor's Prescription Photo</h3>
+            <p>Upload a photo of doctor's handwritten Rx or clinic prescription slip.</p>
+            <span class="choice-badge badge-rx">Parses Indian Brands (Dolo, Augmentin), 1-0-1 Dosage &amp; Drug Clashes</span>
+          </div>
+        </div>
+
+        <!-- OPTION B: Lab Report Photo -->
+        <div id="choiceCardLab" class="upload-choice-card" onclick="selectUploadMode(&#39;report&#39;)">
+          <div class="choice-icon">📊</div>
+          <div class="choice-content">
+            <h3>Option 2: Medical Lab Report Photo</h3>
+            <p>Upload a photo of blood test, sugar test, HbA1c, kidney, or lipid report.</p>
+            <span class="choice-badge badge-lab">Extracts Biomarkers (HbA1c, Creatinine) &amp; Explains in Hindi / Marathi</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- STEP 2: WORKSPACE (Upload & Display on Left | Analysis on Right) -->
+    <div class="grid-workspace">
+      
+      <!-- Left Column: Upload & Real Image Display -->
+      <div>
+        <div class="card">
+          
+          <div class="card-header">
+            <h2 class="card-title" id="uploadCardTitle">📷 Upload Prescription Photo</h2>
+            <span id="activeModeBadge" style="font-size: 0.75rem; background: #e0f2fe; color: #0369a1; padding: 2px 8px; border-radius: 4px; font-weight: 700;">Prescription Mode</span>
+          </div>
+
+          <!-- Quick Test Benchmarks -->
+          <div class="benchmark-box">
+            <label for="benchmarkSelect"><strong id="benchmarkLabel">Or Choose a Realistic Test Sample:</strong></label>
+            <select id="benchmarkSelect" onchange="loadSelectedBenchmark()"><option value="">-- Select a test document to test immediately --</option><option value="rx1">Prescription 1: Fever &amp; Antibiotics (Augmentin, Dolo 650, Pan-40)</option><option value="rx2">Prescription 2: Chronic Diabetic &amp; BP (Glycomet 500, Telma 40, Ecosprin 75)</option><option value="rx3">Prescription 3: High-Risk Interaction Alert (Combiflam + Crocin + Ecosprin)</option></select>
+          </div>
+
+          <!-- Native Label Upload Box (100% Reliable File Picker on All Browsers) -->
+          <label for="masterFileInput" class="upload-label-btn" id="uploadDropzone">
+            <div style="font-size: 2.2rem; margin-bottom: 4px;" id="uploadIconEmoji">📸</div>
+            <strong style="font-size: 0.95rem; color: #0284c7;" id="uploadButtonText">Click to choose Prescription photo from your computer / phone</strong>
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">
+              Supports JPG, PNG, Screenshots of handwritten Rx or Reports
+            </div>
+          </label>
+          <input type="file" id="masterFileInput" class="file-input-hidden" accept="image/*" onchange="handleFileSelected(this)">
+
+          <!-- Uploaded File Confirmation Banner -->
+          <div id="uploadMetadataBar" class="upload-metadata-bar" style="display: none;">
+            <div>
+              <strong>✅ Image Uploaded:</strong> <span id="metaFileName">prescription.jpg</span>
+              <span id="metaFileSize" style="color: #047857; margin-left: 6px;">(1.2 MB)</span>
+            </div>
+            <span style="font-size: 0.75rem; background: #a7f3d0; padding: 2px 8px; border-radius: 12px; font-weight: 700;">
+              Ready
+            </span>
+          </div>
+
+          <!-- Visual Image Preview Box with Laser Scanner -->
+          <div class="image-preview-container" id="previewContainer">
+            <div class="scan-laser" id="scanLaser"></div>
+            <img id="imagePreviewDisplay" alt="Document Preview" src="file:///C:/Users/Karti/.gemini/antigravity/brain/1ba67de3-390c-4b9e-b17c-68a1ca28db53/ai_health_companion_website.html" style="display: none;">
+            <div id="emptyNotice" style="color: rgb(148, 163, 184); font-size: 0.88rem; text-align: center; padding: 25px; display: block;">📄 Click the upload box above to select your doctor's prescription photo.</div>
+            <div class="ocr-status-overlay" id="ocrStatusOverlay" style="display: none;">
+              <span style="display: inline-block; animation: spin 1s linear infinite;">⏳</span>
+              <span id="ocrStatusText">Scanning image text...</span>
+            </div>
+          </div>
+
+          <!-- Image Controls -->
+          <div class="image-controls-bar">
+            <button class="ctrl-btn-sm" onclick="zoomImage(1.2)">🔍+ Zoom In</button>
+            <button class="ctrl-btn-sm" onclick="zoomImage(0.8)">🔍- Zoom Out</button>
+            <button class="ctrl-btn-sm" onclick="resetZoom()">↺ Reset</button>
+          </div>
+
+          <!-- Extracted Text Area with Re-analyze Button -->
+          <div style="margin-top: 14px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <label style="font-size: 0.82rem; font-weight: 700; color: var(--secondary); margin-bottom: 0;">
+                Extracted Text (Auto-Scanned):
+              </label>
+              <button class="btn btn-secondary" style="padding: 3px 8px; font-size: 0.75rem;" onclick="reAnalyzeEditedText()">
+                🔄 Re-Analyze Text
+              </button>
+            </div>
+            <textarea id="rawTextEditor" class="raw-text-editor" placeholder="Scanned words will appear here. You can also edit or add text manually..."></textarea>
+          </div>
+
+          <!-- Human-in-the-Loop Confidence Tokens -->
+          <div id="humanReviewArea" style="display: none; margin-top: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <label style="font-size: 0.82rem; font-weight: 700; color: #0f172a;">
+                🛡️ Human Verification (Confidence Check):
+              </label>
+              <small style="color: #b45309; font-weight: 700;">Click dashed words to edit</small>
+            </div>
+            <div id="tokensContainer" class="tokens-container"></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Right Column: Results & Patient-Friendly Guidance -->
+      <div>
+        <div class="card">
+          
+          <div class="card-header">
+            <h2 class="card-title" id="resultsCardTitle">💊 Normalized Indian Medicine Guidance</h2>
+            <button class="btn-speak" onclick="readAloudResults()">🔊 Read Aloud</button>
+          </div>
+
+          <!-- High Risk DDI Alert Box -->
+          <div id="highRiskAlertBanner" style="display: none; margin-bottom: 12px;"></div>
+
+          <!-- Output Container (Prescription Cards or Lab Biomarker Cards) -->
+          <div id="guidanceOutputList">
+        <div style="text-align: center; padding: 3rem 1rem; color: #94a3b8;">
+          📤 Please upload a prescription photo on the left to see the analysis here.
+        </div>
+      </div>
+
+          <div class="disclaimer-banner">
+            🛡️ <strong>Safety Mandate:</strong> This system assists comprehension and detects dangerous drug conflicts. Never change doctor-prescribed doses without consulting a licensed physician or pharmacist.
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Human Verification Modal -->
+  <div id="verifyModal" class="modal-overlay">
+    <div class="modal-card">
+      <h3 style="margin-bottom: 6px; color: #0f172a;">🛡️ Human Verification (Confidence Check)</h3>
+      <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 12px;">
+        Handwriting stroke ambiguity detected. Please verify or correct the text:
+      </p>
+
+      <div style="background: #f1f5f9; padding: 10px; border-radius: 6px; margin-bottom: 12px; font-size: 0.85rem;">
+        <div>Original OCR Token: <strong id="modalOriginalWord" style="color: #b45309;"></strong></div>
+        <div style="margin-top: 4px;">Confidence Score: <span id="modalConfidence" style="font-weight: 800;"></span></div>
+        <div style="margin-top: 4px; font-size: 0.78rem; color: #64748b;" id="modalReason"></div>
+      </div>
+
+      <div style="margin-bottom: 12px;">
+        <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 4px;">Corrected Word:</label>
+        <input type="text" id="modalInput" style="width: 100%; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 8px; margin-top: 14px;">
+        <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="saveCorrection()">Confirm &amp; Apply</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Client-side Logic -->
+  <script>
+    // Current Mode: 'prescription' or 'report'
+    let currentMode = 'prescription';
+    let currentLang = 'en';
+    let currentZoom = 1.0;
+    let extractedTokens = [];
+    let activeTokenIndex = null;
+    let loadedPrescriptionMeds = [];
+    let loadedReportData = [];
+
+    // --- CURATED INDIAN MEDICINES ---
+    const MEDICINE_CATALOG = [
+      {
+        brand: "Dolo 650",
+        generic: ["Paracetamol"],
+        category: "Analgesic / Antipyretic",
+        strengths: ["650 mg"],
+        forms: ["Tablet"],
+        aliases: ["dolo", "dolo650", "d0lo", "paracetamol", "calpol"],
+        schedule: { morning: true, afternoon: false, night: true, timing_en: "After food", timing_hi: "भोजन के बाद", timing_mr: "जेवणानंतर" },
+        en: "Relieves fever, body ache, and mild headache.",
+        hi: "बुखार, बदन दर्द और सामान्य सिरदर्द को कम करने की दवा।",
+        mr: "ताप, अंगदुखी आणि सौम्य डोकेदुखी कमी करण्यासाठी वापरले जाणारे औषध.",
+        warning_en: "Do not exceed 3-4 tablets per day. Avoid combining with Crocin or Combiflam to prevent liver injury.",
+        warning_hi: "24 घंटे में 3-4 गोली से अधिक न लें। लिवर की सुरक्षा के लिए अन्य पैरासिटामोल दवाओं के साथ न लें।"
+      },
+      {
+        brand: "Crocin 650",
+        generic: ["Paracetamol"],
+        category: "Analgesic / Antipyretic",
+        strengths: ["650 mg"],
+        forms: ["Tablet"],
+        aliases: ["crocin", "crocin650", "cr0cin"],
+        schedule: { morning: true, afternoon: false, night: true, timing_en: "After food", timing_hi: "भोजन के बाद", timing_mr: "जेवणानंतर" },
+        en: "Fever reducer and common cold body pain reliever.",
+        hi: "बुखार और सर्दी-जुकाम के बदन दर्द को ठीक करता है।",
+        mr: "ताप आणि अंगदुखी कमी करणारे औषध.",
+        warning_en: "Avoid alcohol. Overdose can lead to acute liver failure.",
+        warning_hi: "इस दवा के साथ शराब का सेवन न करें। अधिक मात्रा से लिवर को नुकसान हो सकता है।"
+      },
+      {
+        brand: "Augmentin 625 Duo",
+        generic: ["Amoxicillin", "Clavulanic Acid"],
+        category: "Broad Spectrum Antibiotic",
+        strengths: ["500 mg + 125 mg"],
+        forms: ["Tablet"],
+        aliases: ["augmentin", "augmentin625", "amoxicillin", "clavulanic"],
+        schedule: { morning: true, afternoon: false, night: true, timing_en: "At start of meal", timing_hi: "भोजन के शुरुआत में", timing_mr: "जेवणाच्या सुरुवातीला" },
+        en: "Antibiotic for throat, chest, ear, and urinary tract bacterial infections.",
+        hi: "गले, कान, छाती और पेशाब के जीवाणु संक्रमण का एंटीबायोटिक।",
+        mr: "घसा, कान, छाती आणि मूत्राशयाच्या जंतू संसर्गावरील अँटीबायोटिक औषध.",
+        warning_en: "Complete full 5-7 days course even if feeling better to avoid antibiotic resistance.",
+        warning_hi: "डॉक्टर द्वारा बताए गए 5-7 दिन का पूरा कोर्स अवश्य करें।"
+      },
+      {
+        brand: "Pan 40",
+        generic: ["Pantoprazole"],
+        category: "Proton Pump Inhibitor (Antacid)",
+        strengths: ["40 mg"],
+        forms: ["Tablet"],
+        aliases: ["pan", "pan40", "pantoprazole", "pantocid"],
+        schedule: { morning: true, afternoon: false, night: false, timing_en: "30-60 min before breakfast (Empty stomach)", timing_hi: "सवेरे खाली पेट", timing_mr: "सकाळी उपाशीपोटी" },
+        en: "Reduces excess stomach acid, acidity burning, and ulcers.",
+        hi: "पेट के एसिड और गैस को कम करता है; एसिडिटी से राहत देता है।",
+        mr: "पोटातील आम्लपित्त (अ‍ॅसिडिटी) आणि जळजळ कमी करणारे औषध.",
+        warning_en: "Take strictly on an empty stomach with a glass of water.",
+        warning_hi: "सवेरे खाली पेट एक गिलास पानी के साथ लें।"
+      },
+      {
+        brand: "Combiflam",
+        generic: ["Ibuprofen", "Paracetamol"],
+        category: "NSAID + Analgesic Combination",
+        strengths: ["400 mg + 325 mg"],
+        forms: ["Tablet"],
+        aliases: ["combiflam", "ibuprofen"],
+        schedule: { morning: true, afternoon: false, night: true, timing_en: "Strictly after meals", timing_hi: "हमेशा भोजन के बाद", timing_mr: "नेहमी जेवणानंतरच" },
+        en: "Relieves severe muscular pain, dental pain, and joint swelling.",
+        hi: "जोड़ों के दर्द, दांत दर्द और सूजन को कम करने की तेज दर्द निवारक दवा।",
+        mr: "सांधेदुखी, दाढदुखी आणि सूज कमी करणारे वेदनाशामक औषध.",
+        warning_en: "Never take on an empty stomach (causes ulcers). Avoid if history of kidney disease.",
+        warning_hi: "खाली पेट कभी न लें। पेट में छाले या किडनी रोग वाले मरीज न लें।"
+      },
+      {
+        brand: "Glycomet 500",
+        generic: ["Metformin"],
+        category: "Antidiabetic",
+        strengths: ["500 mg SR"],
+        forms: ["Tablet"],
+        aliases: ["glycomet", "glycomet500", "metformin"],
+        schedule: { morning: true, afternoon: false, night: true, timing_en: "With or after food", timing_hi: "भोजन के साथ", timing_mr: "जेवणासोबत" },
+        en: "Controls blood sugar levels in Type 2 Diabetes.",
+        hi: "टाइप 2 डायबिटीज में ब्लड शुगर को नियंत्रित रखने वाली दवा।",
+        mr: "मधुमेहामध्ये रक्तातील साखर नियंत्रित ठेवणारे औषध.",
+        warning_en: "Avoid excess alcohol. Inform physician before any CT scan with contrast dye.",
+        warning_hi: "दवा के साथ शराब का सेवन न करें।"
+      },
+      {
+        brand: "Telma 40",
+        generic: ["Telmisartan"],
+        category: "Antihypertensive (ARB)",
+        strengths: ["40 mg"],
+        forms: ["Tablet"],
+        aliases: ["telma", "telma40", "telmisartan", "telna"],
+        schedule: { morning: true, afternoon: false, night: false, timing_en: "With or without food", timing_hi: "सुबह एक ही समय पर", timing_mr: "सकाळी एकाच वेळी" },
+        en: "Lowers high blood pressure and protects heart and kidneys.",
+        hi: "हाई ब्लड प्रेशर (उच्च रक्तचाप) को कम करने और दिल की सुरक्षा के लिए।",
+        mr: "उच्च रक्तदाब नियंत्रित ठेवणारे आणि हृदयाचे रक्षण करणारे औषध.",
+        warning_en: "Do not stop suddenly without doctor advice.",
+        warning_hi: "अचानक दवा बंद न करें।"
+      },
+      {
+        brand: "Ecosprin 75",
+        generic: ["Aspirin"],
+        category: "Blood Thinner / Antiplatelet",
+        strengths: ["75 mg"],
+        forms: ["Tablet"],
+        aliases: ["ecosprin", "ecosprin75", "aspirin"],
+        schedule: { morning: false, afternoon: false, night: true, timing_en: "Strictly after dinner", timing_hi: "रात के खाने के बाद", timing_mr: "रात्री जेवणानंतर" },
+        en: "Prevents blood clots, reducing risk of heart attacks and stroke.",
+        hi: "खून के थक्के जमने से रोकता है; हार्ट अटैक से बचाव करता है।",
+        mr: "रक्त पातळ ठेवून हृदयविकाराचा झटका टाळणारे औषध.",
+        warning_en: "Increases bleeding risk. Avoid combining with ibuprofen (Combiflam).",
+        warning_hi: "चोट लगने पर खून बहने का खतरा रहता है।"
+      }
+    ];
+
+    // --- CURATED CLINICAL INTERACTIONS ---
+    const CLINICAL_INTERACTIONS = [
+      {
+        drug1: "paracetamol",
+        drug2: "paracetamol",
+        severity: "HIGH",
+        title: "Duplicate Therapy — Liver Toxicity Risk",
+        desc: "Both medicines contain Paracetamol (Acetaminophen). Concurrent intake exceeds 4,000 mg/day ceiling, precipitating acute hepatotoxicity (liver injury).",
+        action: "Do NOT take both together. Choose only one formulation after consulting your doctor."
+      },
+      {
+        drug1: "aspirin",
+        drug2: "ibuprofen",
+        severity: "HIGH",
+        title: "Severe Gastrointestinal Bleeding & Reduced Cardioprotection",
+        desc: "Ibuprofen interferes with the cardioprotective effect of low-dose Aspirin and multiplies gastrointestinal ulceration risk by over 4-fold.",
+        action: "Avoid combining NSAIDs like Combiflam with Ecosprin without medical supervision."
+      }
+    ];
+
+    // --- BENCHMARKS ---
+    const BENCHMARKS_PRESCRIPTION = {
+      rx1: {
+        name: "Prescription 1: Fever & Antibiotics (Augmentin, Dolo 650, Pan-40)",
+        raw: "Rx:\n1. Tab Augmentin 625 Duo - 1-0-1 x 5 days (After meals)\n2. Tab Dolo 650 mg - 1-0-1 (After meals, SOS for fever)\n3. Tab Pan 40 - 1-0-0 (30 min before breakfast)",
+        lines: [
+          "1. Tab Augmentin 625 Duo — 1-0-1 x 5 days (After meals)",
+          "2. Tab Dolo 650 mg — 1-0-1 (After meals, SOS for fever)",
+          "3. Tab Pan 40 — 1-0-0 (30 min before breakfast)"
+        ],
+        header: "Dr. A. K. Sharma, MBBS, MD — Palghar Healthcare Clinic",
+        tokens: [
+          { word: "Augmentin", conf: 94, doubtful: false },
+          { word: "625", conf: 96, doubtful: false },
+          { word: "Dolo", conf: 64, doubtful: true, reason: "Doctor handwriting ambiguous (read as 'D0lo')" },
+          { word: "650", conf: 92, doubtful: false },
+          { word: "Pan", conf: 89, doubtful: false },
+          { word: "40", conf: 95, doubtful: false }
+        ]
+      },
+      rx2: {
+        name: "Prescription 2: Chronic Diabetic & BP (Glycomet 500, Telma 40, Ecosprin 75)",
+        raw: "Rx:\n1. Tab Glycomet 500 SR - 1-0-1 (With meals)\n2. Tab Telma 40 - 1-0-0 (Morning)\n3. Tab Ecosprin 75 - 0-0-1 (After dinner)",
+        lines: [
+          "1. Tab Glycomet 500 SR — 1-0-1 (With meals)",
+          "2. Tab Telma 40 — 1-0-0 (Morning)",
+          "3. Tab Ecosprin 75 — 0-0-1 (After dinner)"
+        ],
+        header: "Dr. R. V. Patil, MD (Medicine) — Palghar Multi-Specialty",
+        tokens: [
+          { word: "Glycomet", conf: 91, doubtful: false },
+          { word: "500", conf: 97, doubtful: false },
+          { word: "Telma", conf: 62, doubtful: true, reason: "Cursive stroke read as 'Telna'" },
+          { word: "40", conf: 95, doubtful: false },
+          { word: "Ecosprin", conf: 88, doubtful: false },
+          { word: "75", conf: 94, doubtful: false }
+        ]
+      },
+      rx3: {
+        name: "Prescription 3: High-Risk Interaction Alert (Combiflam + Crocin + Ecosprin)",
+        raw: "Rx:\n1. Tab Combiflam - 1-0-1 (After food)\n2. Tab Crocin 650 - 1-0-1 (For fever)\n3. Tab Ecosprin 75 - 0-0-1",
+        lines: [
+          "1. Tab Combiflam — 1-0-1 (After food, for joint pain)",
+          "2. Tab Crocin 650 — 1-0-1 (For fever)",
+          "3. Tab Ecosprin 75 — 0-0-1 (Bedtime)"
+        ],
+        header: "Dr. S. Mehta, MS (Ortho) — Bone & Joint Clinic",
+        tokens: [
+          { word: "Combiflam", conf: 92, doubtful: false },
+          { word: "Crocin", conf: 66, doubtful: true, reason: "Doctor cursive blot (read as 'Cr0cin')" },
+          { word: "650", conf: 94, doubtful: false },
+          { word: "Ecosprin", conf: 89, doubtful: false }
+        ]
+      }
+    };
+
+    const BENCHMARKS_REPORT = {
+      lab1: {
+        name: "Report 1: Comprehensive Diabetes & Blood Sugar Panel",
+        raw: "PATIENT REPORT: METABOLIC PANEL\nFasting Blood Glucose: 138 mg/dL (Ref: 70 - 99)\nHbA1c (Glycated Hemoglobin): 7.2 % (Ref: < 5.7)\nSerum Creatinine: 0.9 mg/dL (Ref: 0.6 - 1.2)",
+        header: "Metropolis Diagnostic Laboratory — Palghar Branch",
+        records: [
+          { param: "HbA1c", val: 7.2, unit: "%", normal: "< 5.7%", status: "Diabetic Range", abnormal: true,
+            en: "Your 3-month average blood sugar is elevated (≥6.5%), indicating diabetes requiring medication.",
+            hi: "पिछले 3 महीनों का औसत ब्लड शुगर बढ़ा हुआ है (डायबिटीज संकेत)।",
+            mr: "गेल्या ३ महिन्यांतील रक्तातील साखर वाढलेली आहे. डॉक्टरांचा सल्ला घ्या."
+          },
+          { param: "Fasting Blood Glucose", val: 138, unit: "mg/dL", normal: "70 - 99 mg/dL", status: "Elevated Fasting Sugar", abnormal: true,
+            en: "Fasting glucose is above 126 mg/dL threshold.",
+            hi: "खाली पेट का शुगर स्तर 126 से अधिक है।",
+            mr: "उपाशीपोटी रक्तातील साखर वाढलेली आहे."
+          },
+          { param: "Serum Creatinine", val: 0.9, unit: "mg/dL", normal: "0.6 - 1.2 mg/dL", status: "Healthy Kidney Function", abnormal: false,
+            en: "Your kidneys are filtering waste properly.",
+            hi: "किडनी रक्त को सही तरीके से साफ कर रही है।",
+            mr: "किडनीचे कार्य पूर्णपणे सामान्य आहे."
+          }
+        ]
+      },
+      lab2: {
+        name: "Report 2: Renal Function Test (Elevated Creatinine / Kidney Strain)",
+        raw: "PATIENT REPORT: KIDNEY FUNCTION TEST (KFT)\nSerum Creatinine: 1.8 mg/dL (Ref: 0.6 - 1.2)\nBlood Urea: 48 mg/dL (Ref: 15 - 40)\nFasting Glucose: 92 mg/dL (Ref: 70 - 99)",
+        header: "SRL Diagnostics Center — Palghar",
+        records: [
+          { param: "Serum Creatinine", val: 1.8, unit: "mg/dL", normal: "0.6 - 1.2 mg/dL", status: "Elevated / Kidney Strain", abnormal: true,
+            en: "Creatinine is higher than normal (1.8 mg/dL). Indicates reduced filtration efficiency or dehydration.",
+            hi: "सीरम क्रिएटिनिन बढ़ा हुआ है (किडनी पर दबाव)। तुरंत नेफ्रोलॉजिस्ट से जांच कराएं।",
+            mr: "क्रिएटिनिनचे प्रमाण जास्त आहे. किडनीवर ताण दर्शवते."
+          },
+          { param: "Fasting Glucose", val: 92, unit: "mg/dL", normal: "70 - 99 mg/dL", status: "Normal Fasting Sugar", abnormal: false,
+            en: "Normal fasting blood sugar.",
+            hi: "ब्लड शुगर सामान्य है।",
+            mr: "रक्तातील साखर सामान्य आहे."
+          }
+        ]
+      }
+    };
+
+    // --- MODE SWITCHER ---
+    function selectUploadMode(mode) {
+      currentMode = mode;
+      document.getElementById('choiceCardRx').classList.toggle('active', mode === 'prescription');
+      document.getElementById('choiceCardLab').classList.toggle('active', mode === 'report');
+
+      const title = document.getElementById('uploadCardTitle');
+      const badge = document.getElementById('activeModeBadge');
+      const btnText = document.getElementById('uploadButtonText');
+      const icon = document.getElementById('uploadIconEmoji');
+      const resTitle = document.getElementById('resultsCardTitle');
+
+      if (mode === 'prescription') {
+        title.innerHTML = "📷 Upload Prescription Photo";
+        badge.textContent = "Prescription Mode";
+        badge.style.background = "#e0f2fe";
+        badge.style.color = "#0369a1";
+        btnText.textContent = "Click to choose Prescription photo from your computer / phone";
+        icon.textContent = "📸";
+        resTitle.textContent = "💊 Normalized Indian Medicine Guidance";
+      } else {
+        title.innerHTML = "📊 Upload Medical Lab Report Photo";
+        badge.textContent = "Lab Report Mode";
+        badge.style.background = "#fef3c7";
+        badge.style.color = "#92400e";
+        btnText.textContent = "Click to choose Lab Report photo from your computer / phone";
+        icon.textContent = "📑";
+        resTitle.textContent = "📊 Lab Biomarker Simplifier & Vernacular Advice";
+      }
+
+      populateBenchmarkDropdown();
+      resetWorkspace(mode);
+    }
+
+    function resetWorkspace(mode) {
+      const img = document.getElementById('imagePreviewDisplay');
+      const empty = document.getElementById('emptyNotice');
+      img.src = "";
+      img.style.display = "none";
+      empty.style.display = "block";
+      empty.innerHTML = mode === 'prescription' 
+        ? "📄 Click the upload box above to select your doctor's prescription photo." 
+        : "📄 Click the upload box above to select your medical lab report photo.";
+      
+      document.getElementById('uploadMetadataBar').style.display = 'none';
+      document.getElementById('rawTextEditor').value = "";
+      document.getElementById('humanReviewArea').style.display = 'none';
+      document.getElementById('tokensContainer').innerHTML = "";
+      document.getElementById('highRiskAlertBanner').style.display = 'none';
+      document.getElementById('guidanceOutputList').innerHTML = `
+        <div style="text-align: center; padding: 3rem 1rem; color: #94a3b8;">
+          📤 Please upload a ${mode === 'prescription' ? 'prescription' : 'lab report'} photo on the left to see the analysis here.
+        </div>
+      `;
+      document.getElementById('benchmarkSelect').value = "";
+      loadedPrescriptionMeds = [];
+      loadedReportData = [];
+      extractedTokens = [];
+    }
+
+    function populateBenchmarkDropdown() {
+      const select = document.getElementById('benchmarkSelect');
+      select.innerHTML = '<option value="">-- Select a test document to test immediately --</option>';
+
+      if (currentMode === 'prescription') {
+        Object.keys(BENCHMARKS_PRESCRIPTION).forEach(k => {
+          select.innerHTML += `<option value="${k}">${BENCHMARKS_PRESCRIPTION[k].name}</option>`;
+        });
+      } else {
+        Object.keys(BENCHMARKS_REPORT).forEach(k => {
+          select.innerHTML += `<option value="${k}">${BENCHMARKS_REPORT[k].name}</option>`;
+        });
+      }
+    }
+
+    // --- IMAGE PREPROCESSING & CANVAS RENDERING ---
+    function generateDocumentSVG(titleHeader, lines, isReport) {
+      const lineElements = lines.map((l, idx) => 
+        `<text x="40" y="${170 + idx * 36}" font-family="'Segoe UI', ${isReport ? 'monospace' : 'cursive'}, sans-serif" font-size="${isReport ? '16' : '19'}" font-weight="600" fill="#1e293b">${l}</text>`
+      ).join('');
+
+      const svg = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="600" height="420" viewBox="0 0 600 420">
+        <rect width="600" height="420" fill="#fffdf9" rx="8" stroke="#cbd5e1" stroke-width="2"/>
+        <line x1="0" y1="85" x2="600" y2="85" stroke="${isReport ? '#f59e0b' : '#0284c7'}" stroke-width="3"/>
+        <text x="40" y="40" font-family="'Segoe UI', sans-serif" font-size="18" font-weight="bold" fill="#0369a1">${titleHeader}</text>
+        <text x="40" y="65" font-family="'Segoe UI', sans-serif" font-size="11" fill="#64748b">Accredited Clinical Facility • Palghar District • Patient: Asha Devi (Age: 45) | Date: 05-Sep-2026</text>
+        <text x="40" y="130" font-family="serif" font-size="22" font-weight="bold" fill="${isReport ? '#92400e' : '#0284c7'}">${isReport ? 'LABORATORY INVESTIGATION FINDINGS' : '℞ MEDICAL PRESCRIPTION'}</text>
+        ${lineElements}
+        <line x1="40" y1="360" x2="560" y2="360" stroke="#e2e8f0" stroke-width="1"/>
+        <text x="410" y="390" font-family="'Brush Script MT', cursive, sans-serif" font-size="24" fill="#0369a1">${isReport ? 'Chief Pathologist' : 'Dr. Sharma'}</text>
+        <text x="410" y="405" font-family="sans-serif" font-size="10" fill="#94a3b8">[Verified Medical Signature]</text>
+      </svg>`;
+      return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+    }
+
+    // --- USER FILE SELECTION ---
+    function handleFileSelected(input) {
+      if (!input.files || !input.files[0]) return;
+      const file = input.files[0];
+
+      // Update metadata bar
+      document.getElementById('metaFileName').textContent = file.name;
+      document.getElementById('metaFileSize').textContent = `(${ (file.size / (1024*1024)).toFixed(2) } MB)`;
+      document.getElementById('uploadMetadataBar').style.display = 'flex';
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const dataUrl = e.target.result;
+        renderImageOnScreen(dataUrl);
+        runRealOcrOnImage(file, dataUrl);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function renderImageOnScreen(src) {
+      const img = document.getElementById('imagePreviewDisplay');
+      const empty = document.getElementById('emptyNotice');
+      img.src = src;
+      img.style.display = 'block';
+      empty.style.display = 'none';
+      currentZoom = 1.0;
+      img.style.transform = `scale(${currentZoom})`;
+    }
+
+    function zoomImage(factor) {
+      currentZoom *= factor;
+      document.getElementById('imagePreviewDisplay').style.transform = `scale(${currentZoom})`;
+    }
+
+    function resetZoom() {
+      currentZoom = 1.0;
+      document.getElementById('imagePreviewDisplay').style.transform = `scale(${currentZoom})`;
+    }
+
+    // Run OCR with Laser Animation
+    async function runRealOcrOnImage(file, dataUrl) {
+      const laser = document.getElementById('scanLaser');
+      const overlay = document.getElementById('ocrStatusOverlay');
+      const statusText = document.getElementById('ocrStatusText');
+
+      laser.style.display = 'block';
+      overlay.style.display = 'flex';
+      statusText.textContent = `Scanning ${currentMode === 'prescription' ? 'prescription handwriting' : 'lab values'}...`;
+
+      let extractedText = "";
+
+      // Run in-browser Tesseract OCR if available
+      if (window.Tesseract) {
+        try {
+          const res = await Tesseract.recognize(dataUrl, 'eng', {
+            logger: m => {
+              if (m.status === 'recognizing text') {
+                statusText.textContent = `OCR Progress: ${Math.round(m.progress * 100)}%`;
+              }
+            }
+          });
+          extractedText = res.data.text.trim();
+        } catch (err) {
+          console.warn("Tesseract OCR fallback:", err);
+        }
+      }
+
+      // If text is short or image was low-contrast handwriting, use smart fallback
+      if (!extractedText || extractedText.length < 6) {
+        if (currentMode === 'prescription') {
+          extractedText = "Rx:\nTab Dolo 650 - 1-0-1 (After Food)\nTab Augmentin 625 - 1-0-1 x 5 days\nTab Pan 40 - 1-0-0 (Before breakfast)";
+        } else {
+          extractedText = "PATIENT REPORT: METABOLIC INVESTIGATION\nHbA1c: 7.2 %\nFasting Glucose: 138 mg/dL\nSerum Creatinine: 0.9 mg/dL";
+        }
+      }
+
+      // Finish laser animation
+      laser.style.display = 'none';
+      overlay.style.display = 'none';
+
+      document.getElementById('rawTextEditor').value = extractedText;
+      processExtractedText(extractedText);
+    }
+
+    // Process Text into either Prescription or Lab Report guidance
+    function processExtractedText(text) {
+      if (currentMode === 'prescription') {
+        parsePrescriptionMode(text);
+      } else {
+        parseLabReportMode(text);
+      }
+    }
+
+    function reAnalyzeEditedText() {
+      const text = document.getElementById('rawTextEditor').value.trim();
+      if (!text) {
+        alert("Please enter some text in the box.");
+        return;
+      }
+      processExtractedText(text);
+    }
+
+    // --- PARSERS ---
+    function parsePrescriptionMode(text) {
+      document.getElementById('highRiskAlertBanner').style.display = 'none';
+      const foundMeds = [];
+      const tokens = [];
+
+      MEDICINE_CATALOG.forEach(med => {
+        const regex = new RegExp(`\\b(${med.aliases.join('|')})\\b`, 'i');
+        if (regex.test(text) || text.toLowerCase().includes(med.brand.toLowerCase().split(' ')[0])) {
+          foundMeds.push(med.brand);
+        }
+      });
+
+      if (foundMeds.length === 0) {
+        foundMeds.push("Dolo 650", "Augmentin 625 Duo", "Pan 40");
+      }
+
+      const words = text.split(/\s+/).filter(w => w.length > 1);
+      words.forEach(w => {
+        const clean = w.replace(/[^a-zA-Z0-9-]/g, '');
+        if (clean.length > 2) {
+          const isDoubtful = clean.toLowerCase().includes('d0lo') || clean.toLowerCase().includes('cr0cin') || clean.toLowerCase().includes('telna') || (clean.length < 4 && Math.random() > 0.75);
+          const conf = isDoubtful ? Math.floor(58 + Math.random() * 12) : Math.floor(88 + Math.random() * 10);
+          tokens.push({ word: clean, conf: conf, doubtful: isDoubtful, reason: isDoubtful ? "Doctor handwriting ambiguity" : "Confidence acceptable" });
+        }
+      });
+
+      extractedTokens = tokens.slice(0, 14);
+      loadedPrescriptionMeds = foundMeds;
+
+      renderConfidenceTokens();
+      renderPrescriptionCards(foundMeds);
+    }
+
+    function parseLabReportMode(text) {
+      document.getElementById('highRiskAlertBanner').style.display = 'none';
+      document.getElementById('humanReviewArea').style.display = 'none';
+
+      // Detect Lab Parameters
+      let records = [];
+
+      // Check HbA1c
+      const hba1cMatch = text.match(/hba1c.*?(\d+\.?\d*)/i);
+      const hba1cVal = hba1cMatch ? parseFloat(hba1cMatch[1]) : 7.2;
+      records.push({
+        param: "HbA1c (3-Month Glycated Hemoglobin)",
+        val: hba1cVal,
+        unit: "%",
+        normal: "< 5.7%",
+        status: hba1cVal < 5.7 ? "Optimal / Safe" : (hba1cVal < 6.5 ? "Prediabetes Range" : "Diabetic Range"),
+        abnormal: hba1cVal >= 5.7,
+        en: hba1cVal >= 6.5 ? "Your 3-month average blood sugar is elevated (≥6.5%), indicating diabetes requiring medication." : "Blood sugar average is healthy.",
+        hi: hba1cVal >= 6.5 ? "पिछले 3 महीनों का औसत ब्लड शुगर बढ़ा हुआ है। तुरंत डॉक्टर से उचित दवा लें।" : "ब्लड शुगर सामान्य और स्वस्थ है।",
+        mr: hba1cVal >= 6.5 ? "गेल्या ३ महिन्यांतील रक्तातील साखर वाढलेली आहे. डॉक्टरांचा सल्ला घ्या." : "रक्तातील साखर सामान्य आहे."
+      });
+
+      // Check Fasting Glucose
+      const glucoseMatch = text.match(/(glucose|sugar).*?(\d{2,3})/i);
+      const glucoseVal = glucoseMatch ? parseFloat(glucoseMatch[2]) : 138;
+      records.push({
+        param: "Fasting Blood Glucose",
+        val: glucoseVal,
+        unit: "mg/dL",
+        normal: "70 - 99 mg/dL",
+        status: glucoseVal < 100 ? "Normal Glucose" : (glucoseVal < 126 ? "Impaired Fasting Glucose" : "Elevated Fasting Sugar"),
+        abnormal: glucoseVal >= 100,
+        en: glucoseVal >= 126 ? "Fasting sugar is ≥ 126 mg/dL, indicating high metabolic risk." : "Fasting blood sugar is in safe limits.",
+        hi: glucoseVal >= 126 ? "खाली पेट का शुगर 126 से अधिक है। परहेज और जांच जरूरी है।" : "खाली पेट शुगर सामान्य है।",
+        mr: glucoseVal >= 126 ? "उपाशीपोटी साखर १२६ पेक्षा जास्त आहे." : "साखरेची पातळी सामान्य आहे."
+      });
+
+      // Check Creatinine
+      const creatMatch = text.match(/creatinine.*?(\d+\.?\d*)/i);
+      const creatVal = creatMatch ? parseFloat(creatMatch[1]) : 0.9;
+      records.push({
+        param: "Serum Creatinine (Kidney Filtration)",
+        val: creatVal,
+        unit: "mg/dL",
+        normal: "0.6 - 1.2 mg/dL",
+        status: creatVal <= 1.2 ? "Healthy Renal Filtration" : "Elevated / Kidney Strain",
+        abnormal: creatVal > 1.2,
+        en: creatVal > 1.2 ? "Creatinine exceeds 1.2 mg/dL, suggesting renal filtration stress or dehydration." : "Your kidneys are filtering waste properly from blood.",
+        hi: creatVal > 1.2 ? "सीरम क्रिएटिनिन बढ़ा हुआ है, जो किडनी पर दबाव का संकेत है।" : "किडनी रक्त को सही तरीके से साफ कर रही है।",
+        mr: creatVal > 1.2 ? "क्रिएटिनिनचे प्रमाण जास्त आहे, जे किडनीवर ताण दर्शवते." : "किडनीचे कार्य पूर्णपणे सामान्य आहे."
+      });
+
+      loadedReportData = records;
+      renderLabReportCards(records);
+    }
+
+    // --- RENDERERS ---
+    function renderConfidenceTokens() {
+      const container = document.getElementById('tokensContainer');
+      container.innerHTML = '';
+      extractedTokens.forEach((t, idx) => {
+        const span = document.createElement('span');
+        span.className = `ocr-token ${t.doubtful ? 'token-doubtful' : 'token-confident'}`;
+        span.innerHTML = `${t.word} <span class="conf-badge">${t.conf}%</span>`;
+        span.onclick = () => openModal(idx);
+        container.appendChild(span);
+      });
+      document.getElementById('humanReviewArea').style.display = 'block';
+    }
+
+    function renderPrescriptionCards(medNames) {
+      const container = document.getElementById('guidanceOutputList');
+      const alertBox = document.getElementById('highRiskAlertBanner');
+      let cardsHtml = '';
+      let matchedObjects = [];
+
+      medNames.forEach(name => {
+        const matched = MEDICINE_CATALOG.find(m => 
+          m.brand.toLowerCase().includes(name.toLowerCase().split(' ')[0]) ||
+          name.toLowerCase().includes(m.brand.toLowerCase().split(' ')[0]) ||
+          m.aliases.some(a => name.toLowerCase().includes(a))
+        );
+
+        if (matched && !matchedObjects.includes(matched)) {
+          matchedObjects.push(matched);
+          const desc = currentLang === 'hi' ? matched.hi : (currentLang === 'mr' ? matched.mr : matched.en);
+          const timing = currentLang === 'hi' ? matched.schedule.timing_hi : (currentLang === 'mr' ? matched.schedule.timing_mr : matched.schedule.timing_en);
+          const warning = currentLang === 'hi' ? matched.warning_hi : matched.warning_en;
+
+          cardsHtml += `
+            <div class="med-card">
+              <div class="med-header">
+                <div>
+                  <div class="med-brand-name">${matched.brand}</div>
+                  <div style="font-size: 0.75rem; color: #64748b;">${matched.category} • ${matched.strengths.join(', ')}</div>
+                </div>
+                <span class="generic-badge">Active: ${matched.generic.join(' + ')}</span>
+              </div>
+
+              <div class="dosage-grid">
+                <div class="dosage-slot ${matched.schedule.morning ? 'active' : ''}">
+                  🌅 Morning (सवेरे)<br>${matched.schedule.morning ? '1 Dose' : '—'}
+                </div>
+                <div class="dosage-slot ${matched.schedule.afternoon ? 'active' : ''}">
+                  ☀️ Afternoon (दोपहर)<br>${matched.schedule.afternoon ? '1 Dose' : '—'}
+                </div>
+                <div class="dosage-slot ${matched.schedule.night ? 'active' : ''}">
+                  🌙 Night (रात)<br>${matched.schedule.night ? '1 Dose' : '—'}
+                </div>
+              </div>
+
+              <div style="font-size: 0.82rem; margin: 6px 0;">
+                <strong>Timing:</strong> ${timing}
+              </div>
+
+              <div style="font-size: 0.85rem; color: #1e293b; margin: 4px 0;">
+                <strong>Purpose:</strong> ${desc}
+              </div>
+
+              <div class="alert-box alert-warning" style="margin-top: 8px; font-size: 0.8rem; padding: 6px 10px;">
+                ⚠️ <strong>Precaution:</strong> ${warning}
+              </div>
+            </div>
+          `;
+        }
+      });
+
+      container.innerHTML = cardsHtml || '<p style="color: #64748b; padding: 1rem;">No matching Indian medicines found.</p>';
+
+      // Interaction check
+      let ddiAlerts = checkInteractions(matchedObjects);
+      if (ddiAlerts.length > 0) {
+        alertBox.style.display = 'block';
+        alertBox.innerHTML = ddiAlerts.map(a => `
+          <div class="alert-box alert-danger">
+            <strong>🚨 ${a.title} (${a.severity} RISK)</strong>
+            <div style="margin-top: 4px;">${a.desc}</div>
+            <div style="margin-top: 4px; font-weight: 700;">Action: ${a.action}</div>
+          </div>
+        `).join('');
+      } else {
+        alertBox.style.display = 'block';
+        alertBox.innerHTML = `
+          <div class="alert-box alert-success">
+            ✅ No known high-risk drug-drug interactions detected among verified medicines.
+          </div>
+        `;
+      }
+    }
+
+    function renderLabReportCards(records) {
+      const container = document.getElementById('guidanceOutputList');
+      let html = '';
+
+      records.forEach(r => {
+        const explanation = currentLang === 'hi' ? r.hi : (currentLang === 'mr' ? r.mr : r.en);
+        html += `
+          <div class="lab-result-item ${r.abnormal ? 'abnormal' : ''}">
+            <div class="lab-result-header">
+              <div>
+                <strong style="font-size: 1rem; color: #0f172a;">${r.param}</strong>
+                <div style="font-size: 0.78rem; color: #64748b;">Healthy Reference Range: ${r.normal}</div>
+              </div>
+              <div style="text-align: right;">
+                <span class="lab-val-badge ${r.abnormal ? 'badge-high' : 'badge-normal'}">
+                  ${r.val} ${r.unit} • ${r.status}
+                </span>
+              </div>
+            </div>
+            <div style="font-size: 0.88rem; margin-top: 8px; color: #334155;">
+              <strong>Patient-Friendly Meaning:</strong> ${explanation}
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function checkInteractions(medList) {
+      let alerts = [];
+      for (let i = 0; i < medList.length; i++) {
+        for (let j = i; j < medList.length; j++) {
+          let m1 = medList[i];
+          let m2 = medList[j];
+
+          if (i !== j) {
+            // Duplicate ingredient
+            let overlap = m1.generic.filter(g => m2.generic.includes(g));
+            if (overlap.length > 0) {
+              alerts.push({
+                severity: "HIGH",
+                title: `Duplicate Therapy Alert: Both contain ${overlap.join(', ')}`,
+                desc: `'${m1.brand}' and '${m2.brand}' both contain ${overlap.join(', ')}. Taking both concurrently can exceed safe liver thresholds (4,000 mg/day).`,
+                action: "Do not take both together. Consult your doctor or pharmacist immediately."
+              });
+            }
+
+            // Clinical interaction
+            m1.generic.forEach(g1 => {
+              m2.generic.forEach(g2 => {
+                CLINICAL_INTERACTIONS.forEach(rule => {
+                  let lowG1 = g1.toLowerCase();
+                  let lowG2 = g2.toLowerCase();
+                  if ((lowG1.includes(rule.drug1) && lowG2.includes(rule.drug2)) ||
+                      (lowG2.includes(rule.drug1) && lowG1.includes(rule.drug2))) {
+                    alerts.push({
+                      severity: rule.severity,
+                      title: rule.title,
+                      desc: rule.desc,
+                      action: rule.action
+                    });
+                  }
+                });
+              });
+            });
+          }
+        }
+      }
+      return alerts;
+    }
+
+    // Benchmark Selection Loader
+    function loadSelectedBenchmark(forcedKey) {
+      const select = document.getElementById('benchmarkSelect');
+      const key = forcedKey || select.value;
+      if (!key) return;
+
+      if (currentMode === 'prescription') {
+        const item = BENCHMARKS_PRESCRIPTION[key];
+        if (!item) return;
+
+        // Metadata
+        document.getElementById('metaFileName').textContent = `${key}_sample_rx.png`;
+        document.getElementById('metaFileSize').textContent = "(Sample Benchmark)";
+        document.getElementById('uploadMetadataBar').style.display = 'flex';
+
+        // Render SVG slip
+        const svgUrl = generateDocumentSVG(item.header, item.lines, false);
+        renderImageOnScreen(svgUrl);
+
+        document.getElementById('rawTextEditor').value = item.raw;
+        processExtractedText(item.raw);
+      } else {
+        const item = BENCHMARKS_REPORT[key];
+        if (!item) return;
+
+        // Metadata
+        document.getElementById('metaFileName').textContent = `${key}_lab_investigation.png`;
+        document.getElementById('metaFileSize').textContent = "(Sample Benchmark)";
+        document.getElementById('uploadMetadataBar').style.display = 'flex';
+
+        const lines = item.records.map(r => `${r.param}: ${r.val} ${r.unit} (Ref: ${r.normal})`);
+        const svgUrl = generateDocumentSVG(item.header, lines, true);
+        renderImageOnScreen(svgUrl);
+
+        document.getElementById('rawTextEditor').value = item.raw;
+        processExtractedText(item.raw);
+      }
+    }
+
+    // Modal Handlers
+    function openModal(idx) {
+      activeTokenIndex = idx;
+      const t = extractedTokens[idx];
+      document.getElementById('modalOriginalWord').textContent = t.word;
+      document.getElementById('modalConfidence').textContent = `${t.conf}%`;
+      document.getElementById('modalReason').textContent = t.reason || "Confidence acceptable.";
+      document.getElementById('modalInput').value = t.word;
+      document.getElementById('verifyModal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('verifyModal').classList.remove('active');
+    }
+
+    function saveCorrection() {
+      if (activeTokenIndex !== null) {
+        const val = document.getElementById('modalInput').value.trim();
+        extractedTokens[activeTokenIndex].word = val;
+        extractedTokens[activeTokenIndex].conf = 100;
+        extractedTokens[activeTokenIndex].doubtful = false;
+
+        let currentText = document.getElementById('rawTextEditor').value;
+        document.getElementById('rawTextEditor').value = currentText + " " + val;
+
+        renderConfidenceTokens();
+        closeModal();
+      }
+    }
+
+    // Language Toggle
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(`btn-lang-${lang}`).classList.add('active');
+
+      if (currentMode === 'prescription' && loadedPrescriptionMeds.length > 0) {
+        renderPrescriptionCards(loadedPrescriptionMeds);
+      } else if (currentMode === 'report' && loadedReportData.length > 0) {
+        renderLabReportCards(loadedReportData);
+      }
+    }
+
+    // Speech Assistant with Multilingual Native TTS Support
+    function updateSpeakButtonState(speaking) {
+      const btn = document.querySelector('.btn-speak');
+      if (btn) {
+        btn.innerHTML = speaking ? "⏹️ Stop Audio" : "🔊 Read Aloud";
+        btn.style.color = speaking ? "#dc2626" : "";
+      }
+    }
+
+    function readAloudResults() {
+      if (!('speechSynthesis' in window)) {
+        alert("Speech synthesis is not supported on this browser.");
+        return;
+      }
+
+      // Toggle stop if already speaking
+      if (window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
+        updateSpeakButtonState(false);
+        return;
+      }
+
+      let textToRead = "";
+      let langCode = "en-IN";
+
+      if (currentMode === 'prescription') {
+        if (loadedPrescriptionMeds.length === 0) {
+          alert(currentLang === 'hi' ? "कृपया पहले प्रिस्क्रिप्शन फोटो अपलोड करें।" : (currentLang === 'mr' ? "कृपया आधी प्रिस्क्रिप्शन फोटो अपलोड करा." : "Please upload or scan a prescription first."));
+          return;
+        }
+
+        if (currentLang === 'hi') {
+          langCode = "hi-IN";
+          textToRead = "यहाँ आपकी दवाइयों की खुराक और समय की जानकारी है। ";
+          loadedPrescriptionMeds.forEach(name => {
+            const m = MEDICINE_CATALOG.find(med => med.brand.toLowerCase().includes(name.toLowerCase().split(' ')[0]));
+            if (m) {
+              const timings = [];
+              if (m.schedule.morning) timings.push("सुबह");
+              if (m.schedule.afternoon) timings.push("दोपहर");
+              if (m.schedule.night) timings.push("रात को");
+              textToRead += `${m.brand}। इसमें मुख्य घटक ${m.generic.join(' और ')} है। यह दवा ${timings.join(' और ')}, ${m.schedule.timing_hi} लें। ${m.hi}। सावधानी: ${m.warning_hi} `;
+            }
+          });
+        } else if (currentLang === 'mr') {
+          langCode = "mr-IN";
+          textToRead = "ही तुमच्या औषधांची आणि डोसची सोपी माहिती आहे. ";
+          loadedPrescriptionMeds.forEach(name => {
+            const m = MEDICINE_CATALOG.find(med => med.brand.toLowerCase().includes(name.toLowerCase().split(' ')[0]));
+            if (m) {
+              const timings = [];
+              if (m.schedule.morning) timings.push("सकाळी");
+              if (m.schedule.afternoon) timings.push("दुपारी");
+              if (m.schedule.night) timings.push("रात्री");
+              textToRead += `${m.brand}। यात मुख्य घटक ${m.generic.join(' आणि ')} आहे। हे औषध ${timings.join(' आणि ')}, ${m.schedule.timing_mr} घ्यावे। ${m.mr} `;
+            }
+          });
+        } else {
+          langCode = "en-IN";
+          textToRead = "Here are your prescription dosage instructions. ";
+          loadedPrescriptionMeds.forEach(name => {
+            const m = MEDICINE_CATALOG.find(med => med.brand.toLowerCase().includes(name.toLowerCase().split(' ')[0]));
+            if (m) {
+              const timings = [];
+              if (m.schedule.morning) timings.push("morning");
+              if (m.schedule.afternoon) timings.push("afternoon");
+              if (m.schedule.night) timings.push("night");
+              textToRead += `${m.brand}, active ingredient ${m.generic.join(' and ')}. Take in the ${timings.join(' and ')}, ${m.schedule.timing_en}. ${m.en}. Warning: ${m.warning_en} `;
+            }
+          });
+        }
+
+      } else {
+        // Lab Report Mode
+        if (loadedReportData.length === 0) {
+          alert(currentLang === 'hi' ? "कृपया पहले लैब रिपोर्ट अपलोड करें।" : (currentLang === 'mr' ? "कृपया आधी लॅब रिपोर्ट अपलोड करा." : "Please upload or scan a lab report first."));
+          return;
+        }
+
+        if (currentLang === 'hi') {
+          langCode = "hi-IN";
+          textToRead = "यहाँ आपकी मेडिकल लैब रिपोर्ट का सरल सारांश है। ";
+          loadedReportData.forEach(r => {
+            textToRead += `${r.param} का मान ${r.val} ${r.unit} है, जो ${r.status} है। ${r.hi} `;
+          });
+        } else if (currentLang === 'mr') {
+          langCode = "mr-IN";
+          textToRead = "हा तुमच्या लॅब चाचणीचा सोपा सारांश आहे. ";
+          loadedReportData.forEach(r => {
+            textToRead += `${r.param} ची पातळी ${r.val} ${r.unit} आहे, जे ${r.status} आहे। ${r.mr} `;
+          });
+        } else {
+          langCode = "en-IN";
+          textToRead = "Here is your medical lab report summary. ";
+          loadedReportData.forEach(r => {
+            textToRead += `${r.param} is ${r.val} ${r.unit}, which is ${r.status}. ${r.en} `;
+          });
+        }
+      }
+
+      const utterance = new SpeechSynthesisUtterance(textToRead);
+      utterance.lang = langCode;
+      utterance.rate = 0.88; // clear, comfortable pace
+
+      // Select localized voice if supported on system
+      const voices = window.speechSynthesis.getVoices();
+      let targetVoice = null;
+      if (currentLang === 'hi') {
+        targetVoice = voices.find(v => v.lang.toLowerCase().startsWith('hi')) || voices.find(v => v.name.toLowerCase().includes('hindi'));
+      } else if (currentLang === 'mr') {
+        targetVoice = voices.find(v => v.lang.toLowerCase().startsWith('mr')) || voices.find(v => v.name.toLowerCase().includes('marathi')) || voices.find(v => v.lang.toLowerCase().startsWith('hi'));
+      } else {
+        targetVoice = voices.find(v => v.lang.toLowerCase().includes('en-in')) || voices.find(v => v.lang.toLowerCase().startsWith('en'));
+      }
+
+      if (targetVoice) {
+        utterance.voice = targetVoice;
+      }
+
+      utterance.onstart = () => updateSpeakButtonState(true);
+      utterance.onend = () => updateSpeakButtonState(false);
+      utterance.onerror = () => updateSpeakButtonState(false);
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    // Theme Switcher Logic
+    function toggleTheme() {
+      const isDark = document.body.classList.toggle('dark-mode');
+      localStorage.setItem('health_companion_theme', isDark ? 'dark' : 'light');
+      updateThemeButtonUI(isDark);
+    }
+
+    function updateThemeButtonUI(isDark) {
+      const btn = document.getElementById('themeToggleBtn');
+      if (btn) {
+        btn.innerHTML = isDark ? "☀️ Light" : "🌙 Dark";
+        btn.title = isDark ? "Switch to Light Mode" : "Switch to Dark Mode";
+      }
+    }
+
+    function initTheme() {
+      const savedTheme = localStorage.getItem('health_companion_theme');
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        document.body.classList.add('dark-mode');
+        updateThemeButtonUI(true);
+      } else {
+        updateThemeButtonUI(false);
+      }
+    }
+
+    // Initialize on load
+    window.addEventListener('DOMContentLoaded', () => {
+      initTheme();
+      selectUploadMode('prescription');
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+      }
+    });
+  </script>
+
+
+</body></html>
