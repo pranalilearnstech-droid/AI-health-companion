@@ -8,7 +8,7 @@ Built for Smart India Hackathon 2026 · Team MedTrace
 
 Live demo Languages Built with
 
-Open the live demo → he nahi ter he pahije https://ai-health-companion-mh55.onrender.com/
+Open the live demo →  https://ai-health-companion-mh55.onrender.com/
 </div>
 
 Note: the live demo is hosted on Render's free plan, so the first load after a quiet period can take up to a minute while the server wakes up.
